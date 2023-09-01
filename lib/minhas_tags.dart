@@ -24,7 +24,7 @@ class MinhasTagsPage extends StatelessWidget {
               'ATENÇÃO: Tag parafusadeira não se encontra no veículo',
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -35,7 +35,7 @@ class MinhasTagsPage extends StatelessWidget {
                   child: Text('VOLTAR'),
                 ),
                 SizedBox(
-                    width: 10), // Ajuste o valor de width conforme necessário
+                    width: 15), // Ajuste o valor de width conforme necessário
                 ElevatedButton(
                   onPressed: () {
                     // Ação do botão 2
