@@ -63,6 +63,8 @@ flutter:
       - images/fordtela1.PNG
       - images/minhastags.PNG
       - images/addtagkey.PNG
+      - images/qrcode.PNG
+      - images/fordpass.PNG
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
