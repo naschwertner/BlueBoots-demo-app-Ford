@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'minhas_tags.dart';
 import 'adicionar_tags.dart';
-import 'configurar_fordpass.dart';
 import 'opcoes.dart';
 
 void main() => runApp(MyApp());
@@ -58,15 +57,6 @@ class MyHomePage extends StatelessWidget {
                     );
                   },
                   child: Text('ADICIONAR TAGS')),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ConfigurarFordPassPage()),
-                    );
-                  },
-                  child: Text('CONFIGURAR FORD PASS')),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(

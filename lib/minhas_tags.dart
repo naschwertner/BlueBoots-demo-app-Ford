@@ -30,10 +30,11 @@ class MinhasTagsPage extends StatelessWidget {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    // Ação do botão 1
+                    Navigator.pop(context);
                   },
                   child: Text('VOLTAR'),
                 ),
+
                 SizedBox(
                     width: 15), // Ajuste o valor de width conforme necessário
                 ElevatedButton(

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ConfigurarFordPassPage extends StatelessWidget {
+class NomearSuaNovaTagPage extends StatefulWidget {
+  @override
+  _NomearSuaNovaTagPageState createState() => _NomearSuaNovaTagPageState();
+}
+
+class _NomearSuaNovaTagPageState extends State<NomearSuaNovaTagPage> {
+  TextEditingController _controller =
+      TextEditingController(); // Controlador para o TextField
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configurar FordPass'),
+        title: Text('Nomear sua nova TAG'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -14,30 +22,14 @@ class ConfigurarFordPassPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'CONFIGURAR FORD PASS',
+              'NOMEAR SUA NOVA TAG',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Text(
-              'Digite o código que aparece em seu app FordPass, escaneie o QR code a seguir para abrir o app.',
-              textAlign: TextAlign.center,
-            ),
             SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Image.asset('images/fordpass.PNG',
-                    width: 180,
-                    height:
-                        180), // Ajuste o tamanho da imagem conforme necessário
-                Image.asset('images/qrcode.PNG',
-                    width: 180,
-                    height:
-                        180), // Ajuste o tamanho da imagem conforme necessário
-              ],
-            ),
+            Image.asset('images/nomear_tag.PNG', width: 400, height: 200),
             SizedBox(height: 20),
             Container(
-              width: 250.0,
+              width: 250.0, // Diminuir a largura do container
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25.0),
@@ -46,27 +38,33 @@ class ConfigurarFordPassPage extends StatelessWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: "Código",
+                  hintText: "Apelido de sua TAG",
                   border: InputBorder.none,
                 ),
               ),
             ),
             SizedBox(height: 20),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    // Ação do botão 1
+                    Navigator.pop(context);
                   },
                   child: Text('VOLTAR'),
                 ),
-                SizedBox(width: 15),
+                SizedBox(
+                    width: 15), // Ajuste o valor de width conforme necessário
                 ElevatedButton(
                   onPressed: () {
-                    // Ação do botão 2
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NomearSuaNovaTagPage()),
+                    );
                   },
-                  child: Text('ADICIONAR'),
+                  child: Text('CONTINUAR'),
                 ),
               ],
             ),

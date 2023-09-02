@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'reiniciar_modulo_ble.dart'; // Importe sua tela aqui
 
 class OpcoesPage extends StatefulWidget {
   @override
@@ -6,14 +7,12 @@ class OpcoesPage extends StatefulWidget {
 }
 
 class _OpcoesPageState extends State<OpcoesPage> {
-  int? selectedButton; // Para rastrear qual botão foi selecionado
+  int? selectedButton;
 
-  // Lista de nomes para os botões
   final List<String> buttonNames = [
     'Renomear TAG',
     'Apagar TAG',
     'Reiniciar módulo BLE',
-    'Descpnectar FordPass'
   ];
 
   @override
@@ -31,47 +30,49 @@ class _OpcoesPageState extends State<OpcoesPage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20), // Espaço adicionado após o "OPÇÕES"
+            SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
                 itemCount: buttonNames.length,
-                separatorBuilder: (context, index) =>
-                    SizedBox(height: 10), // Aumentando o espaço entre os botões
+                separatorBuilder: (context, index) => SizedBox(height: 10),
                 itemBuilder: (context, index) => ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (selectedButton == index)
-                          return Color.fromARGB(
-                              255, 255, 176, 73); // Se selecionado
-                        return const Color.fromARGB(
-                            255, 230, 230, 230); // Senão
+                          return Color.fromARGB(255, 255, 176, 73);
+                        return const Color.fromARGB(255, 230, 230, 230);
                       },
                     ),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Colors.black), // Cor da letra
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                        EdgeInsets.symmetric(
-                            vertical: 30)), // Tornando os botões mais largos
+                        EdgeInsets.symmetric(vertical: 45)),
                   ),
                   onPressed: () {
                     setState(() {
-                      selectedButton =
-                          index; // Altera o botão selecionado ao pressionar
+                      selectedButton = index;
+                      if (buttonNames[index] == 'Reiniciar módulo BLE') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ReiniciarModuloBLEPage()), // Substitua com o nome correto da sua classe da tela
+                        );
+                      }
                     });
                   },
-                  child: Text(buttonNames[
-                      index]), // Usando o nome da lista de nomes para os botões
+                  child: Text(buttonNames[index]),
                 ),
               ),
             ),
-            SizedBox(height: 20), // Espaço antes dos botões inferiores
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    // Ação do botão 1
+                    Navigator.pop(context);
                   },
                   child: Text('VOLTAR'),
                 ),
