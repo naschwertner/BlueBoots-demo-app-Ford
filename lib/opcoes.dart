@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'reiniciar_modulo_ble.dart'; // Importe sua tela aqui
+import 'reiniciar_modulo_ble.dart';
+import 'renomear_tag.dart'; // Importe sua tela aqui
+import 'apagar_tag.dart'; // Importe sua tela aqui
 
 class OpcoesPage extends StatefulWidget {
   @override
@@ -52,13 +54,30 @@ class _OpcoesPageState extends State<OpcoesPage> {
                   onPressed: () {
                     setState(() {
                       selectedButton = index;
-                      if (buttonNames[index] == 'Reiniciar módulo BLE') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ReiniciarModuloBLEPage()), // Substitua com o nome correto da sua classe da tela
-                        );
+                      switch (buttonNames[index]) {
+                        case 'Reiniciar módulo BLE':
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ReiniciarModuloBLEPage()),
+                          );
+                          break;
+                        case 'Renomear TAG':
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    RenomearTagPage()), // Substitua com o nome correto da sua classe da tela
+                          );
+                          break;
+                        case 'Apagar TAG':
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ApagarTagPage()), // Substitua com o nome correto da sua classe da tela
+                          );
+                          break;
                       }
                     });
                   },
