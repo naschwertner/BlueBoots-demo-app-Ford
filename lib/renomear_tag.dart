@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
 class RenomearTagPage extends StatefulWidget {
+  final String tagName;
+
+  RenomearTagPage({required this.tagName});
+
   @override
   _RenomearTagPageState createState() => _RenomearTagPageState();
 }
 
 class _RenomearTagPageState extends State<RenomearTagPage> {
-  TextEditingController _controller =
-      TextEditingController(); // Controlador para o TextField
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Renomear sua TAG'),
+        title: Text('Renomear ${widget.tagName}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -22,7 +25,7 @@ class _RenomearTagPageState extends State<RenomearTagPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'RENOMEAR TAG FURADEIRA',
+              'RENOMEAR ${widget.tagName}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -32,7 +35,7 @@ class _RenomearTagPageState extends State<RenomearTagPage> {
               'Digite como deseja renomear sua TAG',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
-            ), // Novo parágrafo de texto inserido
+            ),
             SizedBox(height: 20),
             Container(
               width: 250.0,

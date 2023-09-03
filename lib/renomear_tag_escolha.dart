@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
 import 'reiniciar_modulo_ble.dart';
-import 'renomear_tag_escolha.dart'; // Importe sua tela aqui
-import 'apagar_tag_escolha.dart'; // Importe sua tela aqui
+import 'renomear_tag.dart';
+import 'apagar_tag.dart';
 
-class OpcoesPage extends StatefulWidget {
+class RenomearTagEscolhaPage extends StatefulWidget {
   @override
   _OpcoesPageState createState() => _OpcoesPageState();
 }
 
-class _OpcoesPageState extends State<OpcoesPage> {
+class _OpcoesPageState extends State<RenomearTagEscolhaPage> {
   int? selectedButton;
 
   final List<String> buttonNames = [
-    'Renomear TAG',
-    'Apagar TAG',
-    'Reiniciar módulo BLE',
+    'TAG Macaco',
+    'TAG Furadeira',
+    'TAG Parafusadeira',
+    'TAG Fenda',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Opções'),
+        title: Text('Renomear TAG'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             Text(
-              'OPÇÕES',
+              'RENOMEAR TAG',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -49,36 +50,11 @@ class _OpcoesPageState extends State<OpcoesPage> {
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                        EdgeInsets.symmetric(vertical: 45)),
+                        EdgeInsets.symmetric(vertical: 35)),
                   ),
                   onPressed: () {
                     setState(() {
                       selectedButton = index;
-                      switch (buttonNames[index]) {
-                        case 'Reiniciar módulo BLE':
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ReiniciarModuloBLEPage()),
-                          );
-                          break;
-                        case 'Renomear TAG':
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    RenomearTagEscolhaPage()), // Substitua com o nome correto da sua classe da tela
-                          );
-                          break;
-                        case 'Apagar TAG':
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ApagarTagEscolhaPage()), // Substitua com o nome correto da sua classe da tela
-                          );
-                          break;
-                      }
                     });
                   },
                   child: Text(buttonNames[index]),
@@ -98,7 +74,18 @@ class _OpcoesPageState extends State<OpcoesPage> {
                 SizedBox(width: 15),
                 ElevatedButton(
                   onPressed: () {
-                    // Ação do botão 2
+                    if (selectedButton != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RenomearTagPage(
+                            tagName: buttonNames[selectedButton!],
+                          ),
+                        ),
+                      );
+                    } else {
+                      // Você pode exibir uma mensagem pedindo para selecionar uma TAG primeiro.
+                    }
                   },
                   child: Text('ADICIONAR'),
                 ),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ApagarTagPage extends StatefulWidget {
+  final String tagName; // Parâmetro para receber o nome da TAG
+
+  ApagarTagPage({required this.tagName});
+
   @override
   _ApagarTagPageState createState() => _ApagarTagPageState();
 }
 
 class _ApagarTagPageState extends State<ApagarTagPage> {
-  TextEditingController _controller =
-      TextEditingController(); // Controlador para o TextField
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,7 @@ class _ApagarTagPageState extends State<ApagarTagPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'APAGAR TAG',
+              'APAGAR ${widget.tagName}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -31,21 +32,10 @@ class _ApagarTagPageState extends State<ApagarTagPage> {
                 height:
                     200), // Se você tiver uma imagem específica para "Apagar TAG", substitua o caminho do arquivo aqui
             SizedBox(height: 20),
-            Container(
-              width: 250.0,
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0),
-                color: Colors.white,
-                border: Border.all(color: Colors.grey, width: 1),
-              ),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  hintText: "Apelido da TAG que deseja apagar",
-                  border: InputBorder.none,
-                ),
-              ),
+            Text(
+              'Ao clicar em "CONTINUAR", a ${widget.tagName} será permanentemente apagada e todas as informações relacionadas a ela serão perdidas.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.red),
             ),
             SizedBox(height: 70),
             Row(
@@ -60,8 +50,7 @@ class _ApagarTagPageState extends State<ApagarTagPage> {
                 SizedBox(width: 15),
                 ElevatedButton(
                   onPressed: () {
-                    // Adicione a lógica do botão CONTINUAR aqui
-                    // Por exemplo, você pode querer mostrar um diálogo de confirmação antes de apagar a TAG
+                    _showConfirmationDialog(context);
                   },
                   child: Text('CONTINUAR'),
                 ),
@@ -70,6 +59,35 @@ class _ApagarTagPageState extends State<ApagarTagPage> {
           ],
         ),
       ),
+    );
+  }
+
+  _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirmar Exclusão'),
+          content:
+              Text('Você realmente deseja apagar a TAG ${widget.tagName}?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo
+              },
+            ),
+            TextButton(
+              child: Text('Apagar'),
+              onPressed: () {
+                // Lógica para apagar a TAG
+                Navigator.of(context).pop(); // Fecha o diálogo
+                Navigator.of(context).pop(); // Retorna à tela anterior
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
