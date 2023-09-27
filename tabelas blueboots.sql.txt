@@ -1,0 +1,21 @@
+base blue_boots
+senha Blueboot789456?
+
+------------------------------------------------------------------------
+
+create table tags (
+  id bigint generated always as identity primary key,
+  codigo text not null,
+  apelido text not null,
+  presente boolean default true
+);
+
+
+INSERT INTO tags (codigo, apelido, presente) 
+VALUES 
+('001', 'Chave de Fenda', true),
+('002', 'Parafusadeira', true),
+('003', 'Alicate', true),
+('004', 'Martelo', true),
+('005', 'Serrote', true);
+
