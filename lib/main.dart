@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
-import 'minhas_tags.dart';
-import 'adicionar_tags.dart';
-import 'opcoes.dart';
+import 'pages/minhas_tags.dart';
+import 'pages/adicionar_tags.dart';
+import 'pages/opcoes.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://ahxuqqvbnnxmbdkmblwd.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoeHVxcXZibm54bWJka21ibHdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU4MzczNzYsImV4cCI6MjAxMTQxMzM3Nn0.W8EbLKDfqwi6fWIFtSsJZ_uW_k2O7xZxXLnc3HVYA_w',
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
