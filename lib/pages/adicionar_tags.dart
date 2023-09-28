@@ -1,7 +1,43 @@
 import 'package:flutter/material.dart';
-import 'nomear_sua_nova_tag.dart'; // Importando a nova tela
+import 'nomear_sua_nova_tag.dart';
+import '../models/tag.dart';
+import '../repository/tag_repository.dart';
 
-class AdicionarTagsPage extends StatelessWidget {
+class AdicionarTagsPage extends StatefulWidget {
+  @override
+  _AdicionarTagsPageState createState() => _AdicionarTagsPageState();
+}
+
+class _AdicionarTagsPageState extends State<AdicionarTagsPage> {
+  final _codigoController = TextEditingController();
+  final _tagRepository = TagRepository();
+
+  @override
+  void dispose() {
+    _codigoController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _adicionarTagECarregarProximaPagina() async {
+    if (_codigoController.text.isNotEmpty) {
+      var novaTag = Tag(
+        id: 0,
+        codigo: _codigoController.text,
+        apelido: 'Nome temporário',
+        presente: true,
+      );
+
+      var tagAdicionada = await _tagRepository.adicionarTag(novaTag);
+
+      if (tagAdicionada != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NomearSuaNovaTagPage()),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +50,17 @@ class AdicionarTagsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                // Botão de teste para navegar diretamente para NomearSuaNovaTagPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NomearSuaNovaTagPage()),
+                );
+              },
+              child: Text('TESTE NAVEGAÇÃO'),
+            ),
             Text(
               'ADICIONAR NOVA TAG',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -22,7 +69,7 @@ class AdicionarTagsPage extends StatelessWidget {
             Image.asset('images/addtagkey.PNG', width: 400, height: 200),
             SizedBox(height: 20),
             Container(
-              width: 250.0, // Diminuir a largura do container
+              width: 250.0,
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25.0),
@@ -30,6 +77,7 @@ class AdicionarTagsPage extends StatelessWidget {
                 border: Border.all(color: Colors.grey, width: 1),
               ),
               child: TextField(
+                controller: _codigoController,
                 decoration: InputDecoration(
                   hintText: "Código da TAG",
                   border: InputBorder.none,
@@ -47,15 +95,10 @@ class AdicionarTagsPage extends StatelessWidget {
                   },
                   child: Text('VOLTAR'),
                 ),
-                SizedBox(
-                    width: 15), // Ajuste o valor de width conforme necessário
+                SizedBox(width: 15),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NomearSuaNovaTagPage()),
-                    );
+                  onPressed: () async {
+                    await _adicionarTagECarregarProximaPagina();
                   },
                   child: Text('CONTINUAR'),
                 ),
